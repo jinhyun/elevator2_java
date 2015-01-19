@@ -6,12 +6,12 @@ import org.junit.Test;
  * Created by Jinhyun on 2015. 1. 17..
  */
 class ElevatorOperate implements Runnable {
-    private Thread t;
+    private Thread thread;
     String threadName = "";
 
     Elevator elevator = new Elevator();
 
-    int floorNumber;
+    int reqFloorNumber;
     boolean isPushUpBtn = false;
 
     public boolean isPushUpBtn() {
@@ -22,12 +22,12 @@ class ElevatorOperate implements Runnable {
         this.isPushUpBtn = isPushUpBtn;
     }
 
-    public int getFloorNumber() {
-        return floorNumber;
+    public int getReqFloorNumber() {
+        return reqFloorNumber;
     }
 
-    public void setFloorNumber(int floorNumber) {
-        this.floorNumber = floorNumber;
+    public void setReqFloorNumber(int reqFloorNumber) {
+        this.reqFloorNumber = reqFloorNumber;
     }
 
     ElevatorOperate (String name){
@@ -48,9 +48,9 @@ class ElevatorOperate implements Runnable {
 
     public void start() {
         System.out.println("Starting" + threadName);
-        if (t == null){
-            t = new Thread (this, threadName);
-            t.start();
+        if (thread == null){
+            thread = new Thread (this, threadName);
+            thread.start();
         }
     }
 
@@ -63,48 +63,41 @@ class ElevatorOperate implements Runnable {
         int srcFloorNumber = elevator.getSrcFloorNumber();
         int destFloorNumber = elevator.getDestFloorNumber();
 
-        for (int i = 0; i < floorNumberList.length; i++){
+        for (int i = 0; i < floorNumberList.length; i++) {
             // 엘리베이터에서 버튼이 눌려있는 층수
-            if (floorNumberList[i] != null && floorNumberList[i].equals("on")){
+            if (floorNumberList[i] != null && floorNumberList[i].equals("on")) {
                 destFloorNumber = i;
-
-                // 엘리베이터 층수보다 대상 층수가 큰 경우, up
-                if (srcFloorNumber < destFloorNumber) {
-                    for (int j = srcFloorNumber;
-                         j <= destFloorNumber; j++){
-
-                        if (elevatorOperate.getFloorNumber() == j && elevatorOperate.isPushUpBtn()){
-                            try {
-                                System.out.println(elevatorOperate.getFloorNumber()
-                                    + "층에서 잠시 멈춥니다.");
-
-                                Thread.sleep(1000);
-                                continue;
-                            } catch (Exception e){
-
-                            }
-                        }
-
-                        try {
-                            Thread.sleep(250);
-                            System.out.println("엘리베이터: " + j + "층");
-                        } catch (Exception e){
-
-                        }
-                    }
-                    break;
-
-                // 엘리베이터 층수보다 대상 층수가 작은 경우, down
-                } else if (srcFloorNumber >= destFloorNumber) {
-
-
-                // 동일한 경우, stop
-                } else {
-
-                }
             }
         }
-//        start();
+
+        // 엘리베이터 층수보다 대상 층수가 큰 경우, up
+        if (srcFloorNumber < destFloorNumber) {
+            for (int j = srcFloorNumber; j <= destFloorNumber; j++){
+                int reqFloorNumber = elevatorOperate.getReqFloorNumber();
+                boolean isPushUpBtn = elevatorOperate.isPushUpBtn();
+
+                try {
+                    if (reqFloorNumber == j && isPushUpBtn){
+                        System.out.println(reqFloorNumber + "층에서 잠시 멈춥니다.");
+                        Thread.sleep(1000);
+                        continue;
+                    }
+
+                    Thread.sleep(250);
+                    System.out.println("엘리베이터: " + j + "층");
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+
+        // 엘리베이터 층수보다 대상 층수가 작은 경우, down
+        } else if (srcFloorNumber >= destFloorNumber) {
+
+
+        // 동일한 경우, stop
+        } else {
+
+        }
     }
 
     public void pushFloorUpBtn(){
@@ -142,8 +135,8 @@ public class TestElevatorOperate {
     /*
      * [v] 사용자가 엘리베이터에서 특정층을 누른다 (10층)
      * [v] 엘리베이터가 올라간다 (1층 > 10층)
-     * [v] 사용자가 오름버튼을 누른다 (5층)
-     * [v] 엘리베이터가 요청이 있는 층에서 멈춘다 (5층)
+     * [v] 사용자가 오름버튼을 누른다 (7층)
+     * [v] 엘리베이터가 요청이 있는 층에서 멈춘다 (7층)
      * [v] 엘리베이터가 올라간다 (10층)
      */
     public static void main(String args[]) {
@@ -153,7 +146,7 @@ public class TestElevatorOperate {
 
         try {
             Thread.sleep(1000);
-            elevatorOperate.setFloorNumber(7);
+            elevatorOperate.setReqFloorNumber(7);
             elevatorOperate.setPushUpBtn(true);
             elevatorOperate.start();
 
