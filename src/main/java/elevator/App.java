@@ -13,11 +13,11 @@ public class App {
      * [v] 엘리베이터가 4층에서 멈춘다 (B_Ev)
      * [v] 엘리베이터에서 사용자가 8층을 누른다 (B)
      * [v] 엘리베이터가 8층에서 멈춘다 (B_Ev)
-     * [] 9층에서 사용자가 오름버튼을 누른다 (C)
-     * [] 엘리베이터가 9층에서 멈춘다 (C_Ev)
-     * [] 엘리베이터에서 사용자가 12층을 누른다 (C)
+     * [v] 9층에서 사용자가 오름버튼을 누른다 (C)
+     * [v] 엘리베이터가 9층에서 멈춘다 (C_Ev)
+     * [v] 엘리베이터에서 사용자가 12층을 누른다 (C)
      * [v] 엘리베이터가 10층에서 멈춘다 (A_Ev)
-     * [] 엘리베이터가 12층에서 멈춘다 (C_Ev)
+     * [v] 엘리베이터가 12층에서 멈춘다 (C_Ev)
      */
     public static void main(String args[]) {
         try {
@@ -30,6 +30,9 @@ public class App {
 
             elevatorOperate.callElevator(4);
             elevatorOperate.pushNumber(8);
+
+            elevatorOperate.callElevator(9);
+            elevatorOperate.pushNumber(12);
         } catch (Exception e){
             e.printStackTrace();
         }

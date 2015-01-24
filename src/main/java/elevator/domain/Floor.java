@@ -1,16 +1,20 @@
 package main.java.elevator.domain;
 
+import java.util.*;
+
+
 /**
  * Created by Jinhyun on 2015. 1. 22..
  */
 public class Floor {
-    int reqFloorNumber;
+    int MaxFloor = 20;
+    String[] reqFloorNumberList = new String[MaxFloor+1];
 
-    public int getReqFloorNumber() {
-        return reqFloorNumber;
+    public void setReqFloorNumberList(int reqFloorNumber) {
+        this.reqFloorNumberList[reqFloorNumber] = "on";
     }
 
-    public void setReqFloorNumber(int reqFloorNumber) {
-        this.reqFloorNumber = reqFloorNumber;
+    public String[] getReqFloorNumberList(){
+        return reqFloorNumberList;
     }
 }

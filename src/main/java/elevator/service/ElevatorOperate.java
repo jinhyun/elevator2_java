@@ -11,23 +11,15 @@ public class ElevatorOperate {
     private Floor floor = new Floor();
 
     public void callElevator(int reqFloorNumber){
-        floor.setReqFloorNumber(reqFloorNumber);
+        floor.setReqFloorNumberList(reqFloorNumber);
     }
 
     public void pushNumber(int number) {
         elevator.destFloorList[number] = "on";
     }
 
-    public boolean isReqFloor(int i){
-        if (floor.getReqFloorNumber() == i){
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public boolean isEvDestFloor(String[] destFloorList, int i){
-        if (destFloorList[i] != null && destFloorList[i].equals("on")){
+    public boolean isNotNullStrOn(String[] strArray, int i){
+        if (strArray[i] != null && strArray[i].equals("on")){
             return true;
         } else {
             return false;
@@ -40,7 +32,7 @@ public class ElevatorOperate {
         int evLastDestFloor = 1;
 
         for (int i=1; i<evDestFloorList.length; i++){
-            if (evDestFloorList[i]!=null && evDestFloorList[i].equals("on")) {
+            if (isNotNullStrOn(evDestFloorList, i)){
                 evLastDestFloor = i;
             }
         }
@@ -50,10 +42,11 @@ public class ElevatorOperate {
                 System.out.println(i + "층");
                 Thread.sleep(200);
 
-                if (isReqFloor(i)
-                        || isEvDestFloor(evDestFloorList, i)) {
+                if (isNotNullStrOn(floor.getReqFloorNumberList(),i)
+                        || isNotNullStrOn(evDestFloorList, i)){
                     System.out.println(i + "층에 도착했습니다.");
                     Thread.sleep(1000);
+
                 }
             }
         } catch (Exception e) {
