@@ -15,7 +15,7 @@ public class ElevatorOperate {
     }
 
     public void pushNumber(int number) {
-        elevator.destFloorList[number] = "on";
+        elevator.setDestFloorList(number);
     }
 
     public boolean isNotNullStrOn(String[] strArray, int i){
@@ -47,6 +47,11 @@ public class ElevatorOperate {
                     System.out.println(i + "층에 도착했습니다.");
                     Thread.sleep(1000);
 
+                }
+
+                if (i==evLastDestFloor){
+                    floor.initReqFloorNumberList();     //TODO: up/down 분리필요
+                    elevator.initDestFloorList();
                 }
             }
         } catch (Exception e) {

@@ -17,4 +17,8 @@ public class Floor {
     public String[] getReqFloorNumberList(){
         return reqFloorNumberList;
     }
+
+    public void initReqFloorNumberList(){
+        this.reqFloorNumberList = new String[MaxFloor+1];
+    }
 }

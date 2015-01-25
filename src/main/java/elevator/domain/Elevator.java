@@ -16,4 +16,16 @@ public class Elevator {
     public void setSrcFloor(int srcFloor) {
         this.srcFloor = srcFloor;
     }
+
+    public String[] getDestFloorList() {
+        return destFloorList;
+    }
+
+    public void setDestFloorList(int destFloorNumber) {
+        this.destFloorList[destFloorNumber] = "on";
+    }
+
+    public void initDestFloorList(){
+        this.destFloorList = new String[MaxFloor+1];
+    }
 }
