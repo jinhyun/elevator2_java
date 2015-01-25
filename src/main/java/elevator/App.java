@@ -2,6 +2,7 @@ package main.java.elevator;
 
 import main.java.elevator.service.ElevatorEngine;
 import main.java.elevator.service.ElevatorOperate;
+import org.junit.Test;
 
 /**
  * Created by Jinhyun on 2015. 1. 17..
@@ -21,18 +22,30 @@ public class App {
      */
     public static void main(String args[]) {
         try {
-            ElevatorOperate elevatorOperate = new ElevatorOperate();
-            elevatorOperate.pushNumber(10);
+            boolean testGoUp = true;
 
-            ElevatorEngine elevatorEngine = new ElevatorEngine(elevatorOperate);
-            Thread thread = new Thread(elevatorEngine);
-            thread.start();
+            if (testGoUp) {
+                ElevatorOperate elevatorOperate = new ElevatorOperate();
+                elevatorOperate.pushNumber(10);
 
-            elevatorOperate.callElevator(4);
-            elevatorOperate.pushNumber(8);
+                ElevatorEngine elevatorEngine = new ElevatorEngine(elevatorOperate);
+                Thread thread = new Thread(elevatorEngine);
+                thread.start();
 
-            elevatorOperate.callElevator(9);
-            elevatorOperate.pushNumber(12);
+                elevatorOperate.callElevator(4);
+                elevatorOperate.pushNumber(8);
+
+                elevatorOperate.callElevator(9);
+                elevatorOperate.pushNumber(12);
+
+            } else {
+                ElevatorOperate elevatorOperate = new ElevatorOperate();
+                elevatorOperate.pushNumber(5);
+
+                ElevatorEngine elevatorEngine = new ElevatorEngine(elevatorOperate);
+                Thread thread = new Thread(elevatorEngine);
+                thread.start();
+            }
         } catch (Exception e){
             e.printStackTrace();
         }

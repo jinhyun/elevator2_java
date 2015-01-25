@@ -5,7 +5,7 @@ package main.java.elevator.domain;
  */
 public class Elevator {
     int MaxFloor = 20;
-    int srcFloor = 1;
+    int srcFloor = 11;
 
     public String[] destFloorList = new String[MaxFloor+1];
 
